@@ -1,0 +1,48 @@
+.new-task-container {
+  position: relative;
+  width: 50%;
+  margin: 1.5rem auto 0;
+}
+
+.task-input {
+  font-size: 1rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  width: 100%;
+  height: max-content;
+  -webkit-box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55);
+  -moz-box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55);
+  box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55);
+  border-radius: 10px;
+  border: none;
+}
+
+.task-input:focus {
+  outline: none;
+  /* Add a custom border color instead */
+  border-color: #6366f1; /* Indigo color */
+  box-shadow: 0 0 0 3px rgba(99, 101, 241, 0.568); /* Optional soft glow */
+  transition: 100ms;
+}
+
+.plus-btn {
+  position: absolute;
+  padding: 1.5rem;
+  top: 10px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.25);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plus-btn:hover {
+  background-color: #4e46e580;
+}

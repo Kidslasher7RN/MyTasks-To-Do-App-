@@ -1,0 +1,16 @@
+{
+  "tasks": [
+    {
+      "state": "active",
+      "name": "Eat hamburger at Mcdonald"
+    },
+    {
+      "state": "active",
+      "name": "Clean the room"
+    },
+    {
+      "state": "completed",
+      "name": "10 push ups NOW! "
+    }
+  ]
+}
