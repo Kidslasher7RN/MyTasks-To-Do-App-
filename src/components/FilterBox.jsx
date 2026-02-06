@@ -2,13 +2,15 @@ import "./FilterBox.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useContext, useState, useEffect} from "react";
-import {FilterContext} from "../contexts/RootContext";
+import {TasksContext} from "../contexts/RootContext";
 import axios from "axios";
 
 export default function FilterBox() {
   const [tasks, setTasks] = useState([]);
-  const {_, setShownTasks} = useContext(FilterContext);
-  const [currentFilter, setCurrentFilter] = useState("active");
+  const {setShownTasks} = useContext(TasksContext);
+  const [currentFilter, setCurrentFilter] = useState("all");
+
+  console.log(tasks);
 
   useEffect(() => {
     async function getTasks(url) {
@@ -22,34 +24,36 @@ export default function FilterBox() {
     getTasks("http://localhost:3000/tasks");
   }, []);
 
-  console.log(tasks);
+  useEffect(() => {
+    if (currentFilter === "all") {
+      setShownTasks(tasks);
+      return;
+    }
+    if (currentFilter === "active") {
+      setShownTasks(tasks.filter((task) => task.state == "active"));
+      return;
+    }
+    setShownTasks(tasks.filter((task) => task.state == "completed"));
+  }, [tasks, currentFilter, setShownTasks]);
+
   return (
     <div className="filter-box-container">
       <ul className="content-filter">
         <li
           className={`filter ${currentFilter == "all" ? "active" : ""}`}
-          onClick={() => {
-            setCurrentFilter("all");
-            setShownTasks(tasks);
-          }}
+          onClick={() => setCurrentFilter("all")}
         >
           All
         </li>
         <li
           className={`filter ${currentFilter == "active" ? "active" : ""}`}
-          onClick={() => {
-            setCurrentFilter("active");
-            setShownTasks(tasks.filter((task) => task.state == "active"));
-          }}
+          onClick={() => setCurrentFilter("active")}
         >
           Active
         </li>
         <li
           className={`filter ${currentFilter == "completed" ? "active" : ""}`}
-          onClick={() => {
-            setCurrentFilter("completed");
-            setShownTasks(tasks.filter((task) => task.state == "completed"));
-          }}
+          onClick={() => setCurrentFilter("completed")}
         >
           Completed
         </li>

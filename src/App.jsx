@@ -7,7 +7,7 @@ import FilterBox from "./components/FilterBox";
 import CheckList from "./components/tasks_list/CheckList";
 import Stats from "./components/Stats";
 //context
-import {FilterContext} from "./contexts/RootContext";
+import {TasksContext} from "./contexts/RootContext";
 import {useState} from "react";
 function App() {
   const [shownTasks, setShownTasks] = useState([]);
@@ -15,12 +15,13 @@ function App() {
     <>
       <Logo />
       <ProgressBar />
-      <FilterContext.Provider value={{shownTasks, setShownTasks}}>
+      <TasksContext.Provider value={{shownTasks, setShownTasks}}>
         <NewTask />
         <FilterBox />
-        {shownTasks && <CheckList />}
-      </FilterContext.Provider>
+        <CheckList />
+      </TasksContext.Provider>
 
+    
       <Stats />
     </>
   );

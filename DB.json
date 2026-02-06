@@ -1,16 +1,24 @@
 {
   "tasks": [
     {
+      "id": "ebd0",
       "state": "active",
       "name": "Eat hamburger at Mcdonald"
     },
     {
+      "id": "d52c",
       "state": "active",
       "name": "Clean the room"
     },
     {
-      "state": "completed",
-      "name": "10 push ups NOW! "
+      "id": "a852",
+      "state": "active",
+      "name": "10 push ups NOW!"
+    },
+    {
+      "id": "5abf",
+      "state": "active",
+      "name": "clean the dog"
     }
   ]
 }

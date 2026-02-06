@@ -1,10 +1,10 @@
 import "./tasks_list.css";
 import Task from "./Task";
 import {useContext} from "react";
-import {FilterContext} from "../../contexts/RootContext";
+import {TasksContext} from "../../contexts/RootContext";
 
 export default function CheckList() {
-  const {shownTasks, _} = useContext(FilterContext);
+  const {shownTasks, _} = useContext(TasksContext);
 
   return (
     <div className="check-list">
