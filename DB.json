@@ -1,11 +1,6 @@
 {
   "tasks": [
     {
-      "id": "ebd0",
-      "state": "active",
-      "name": "Eat hamburger at Mcdonald"
-    },
-    {
       "id": "d52c",
       "state": "active",
       "name": "Clean the room"

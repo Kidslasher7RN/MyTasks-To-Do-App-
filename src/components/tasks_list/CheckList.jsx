@@ -8,7 +8,6 @@ export default function CheckList() {
 
   return (
     <div className="check-list">
-      <p>filter : </p>
       {shownTasks.map((task) => (
         <Task id={task.id} name={task.name} state={task.state} key={task.id} />
       ))}

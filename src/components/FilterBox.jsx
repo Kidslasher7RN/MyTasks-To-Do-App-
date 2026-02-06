@@ -6,11 +6,8 @@ import {TasksContext} from "../contexts/RootContext";
 import axios from "axios";
 
 export default function FilterBox() {
-  const [tasks, setTasks] = useState([]);
-  const {setShownTasks} = useContext(TasksContext);
+  const {tasks, setTasks, setShownTasks} = useContext(TasksContext);
   const [currentFilter, setCurrentFilter] = useState("all");
-
-  console.log(tasks);
 
   useEffect(() => {
     async function getTasks(url) {

@@ -10,12 +10,13 @@ import Stats from "./components/Stats";
 import {TasksContext} from "./contexts/RootContext";
 import {useState} from "react";
 function App() {
+  const [tasks, setTasks] = useState([]);
   const [shownTasks, setShownTasks] = useState([]);
   return (
     <>
       <Logo />
       <ProgressBar />
-      <TasksContext.Provider value={{shownTasks, setShownTasks}}>
+      <TasksContext.Provider value={{tasks, setTasks, shownTasks, setShownTasks}}>
         <NewTask />
         <FilterBox />
         <CheckList />
