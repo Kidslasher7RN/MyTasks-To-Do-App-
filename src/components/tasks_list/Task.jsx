@@ -8,15 +8,22 @@ import {useContext} from "react";
 export default function Task({id, name, state}) {
   const {tasks, setTasks} = useContext(TasksContext);
 
-  async function completeTask() {
-    if (state == "active") {
-      axios.patch(`http://localhost:3000/tasks/${id}`, {
-        state: "completed",
+  async function completeTask(e) {
+    const checked = e.target.checked;
+    const nextState = checked ? "completed" : "active";
+    const prev = tasks;
+
+    setTasks(
+      prev.map((task) => (task.id == id ? {...task, state: nextState} : task)),
+    );
+
+    try {
+      await axios.patch(`http://localhost:3000/tasks/${id}`, {
+        state: nextState,
       });
-    } else {
-      axios.patch(`http://localhost:3000/tasks/${id}`, {
-        state: "active",
-      });
+    } catch (err) {
+      console.error(err);
+      setTasks(prev);
     }
   }
 
@@ -36,7 +43,7 @@ export default function Task({id, name, state}) {
       <input
         className="task-checkbox"
         type="checkbox"
-        checked={state == "completed" && true}
+        checked={state == "completed"}
         onChange={completeTask}
       />
       <p

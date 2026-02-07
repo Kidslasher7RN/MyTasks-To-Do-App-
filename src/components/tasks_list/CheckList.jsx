@@ -4,8 +4,8 @@ import {useContext} from "react";
 import {TasksContext} from "../../contexts/RootContext";
 
 export default function CheckList() {
-  const {shownTasks, _} = useContext(TasksContext);
-
+  const {shownTasks} = useContext(TasksContext);
+ 
   return (
     <div className="check-list">
       {shownTasks.map((task) => (

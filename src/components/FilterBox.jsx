@@ -10,7 +10,7 @@ export default function FilterBox() {
   const [currentFilter, setCurrentFilter] = useState("all");
 
   useEffect(() => {
-    async function getTasks(url) {
+    function getTasks(url) {
       axios
         .get(url)
         .then((res) => {
@@ -32,6 +32,21 @@ export default function FilterBox() {
     }
     setShownTasks(tasks.filter((task) => task.state == "completed"));
   }, [tasks, currentFilter, setShownTasks]);
+
+  async function clearCompletedTasks() {
+    const prev = tasks;
+    setTasks((prev) => prev.filter((task) => task.state != "completed"));
+    const deletedTasks = prev.filter((task) => task.state == "completed");
+
+    try {
+      await deletedTasks.forEach((delTask) => {
+        axios.delete(`http://localhost:3000/tasks/${delTask.id}`);
+      });
+    } catch (err) {
+      console.error(err);
+      setTasks(prev);
+    }
+  }
 
   return (
     <div className="filter-box-container">
@@ -56,7 +71,7 @@ export default function FilterBox() {
         </li>
       </ul>
 
-      <button className="clear-completed">
+      <button className="clear-completed" onClick={clearCompletedTasks}>
         <FontAwesomeIcon icon={faTrash} />
         Clear Completed
       </button>

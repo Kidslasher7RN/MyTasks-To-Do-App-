@@ -36,7 +36,7 @@ export default function Logo() {
           <FontAwesomeIcon icon={faListCheck} style={{color: "#4F46E5"}} /> My
           Tasks
         </span>
-        Stay focused and organized
+        Stay focused and organized (this will be rebrandedd to "keepMyIdea")
       </div>
       <h3 className="day">
         {days[date.getDay()]}, {month[date.getMonth()]} {date.getDate()}

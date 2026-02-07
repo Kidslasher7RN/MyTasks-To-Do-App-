@@ -26,6 +26,7 @@ export default function NewTask() {
     const taskName = inputRef.current.value;
     if (!taskName) return;
     handlePost(taskName);
+    inputRef.current.value = "";
   }
 
   return (
@@ -36,7 +37,7 @@ export default function NewTask() {
         type="text"
         ref={inputRef}
       />
-      <button className="plus-btn" type="submit">
+      <button className="plus-btn" type="submit" onClick={handleSubmit}>
         <FontAwesomeIcon icon={faPlus} />
       </button>
     </form>

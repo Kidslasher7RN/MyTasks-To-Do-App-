@@ -1,19 +1,9 @@
 {
   "tasks": [
     {
-      "id": "d52c",
-      "state": "active",
-      "name": "Clean the room"
-    },
-    {
-      "id": "a852",
-      "state": "active",
-      "name": "10 push ups NOW!"
-    },
-    {
-      "id": "5abf",
-      "state": "active",
-      "name": "clean the dog"
+      "id": "93e3",
+      "state": "completed",
+      "name": "go to mcdonald"
     }
   ]
 }

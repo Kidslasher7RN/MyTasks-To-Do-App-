@@ -15,15 +15,16 @@ function App() {
   return (
     <>
       <Logo />
-      <ProgressBar />
-      <TasksContext.Provider value={{tasks, setTasks, shownTasks, setShownTasks}}>
+
+      <TasksContext.Provider
+        value={{tasks, setTasks, shownTasks, setShownTasks}}
+      >
+        <ProgressBar />
         <NewTask />
         <FilterBox />
         <CheckList />
+        <Stats />
       </TasksContext.Provider>
-
-    
-      <Stats />
     </>
   );
 }
