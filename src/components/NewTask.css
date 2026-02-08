@@ -1,13 +1,13 @@
 .new-task-container {
   position: relative;
-  width: 50%;
+  width: var(--content-width);
   margin: 1.5rem auto 0;
 }
 
 .task-input {
   font-size: 1rem;
   background-color: #ffffff;
-  padding: 1.5rem;
+  padding: 1.1rem 4.25rem 1.1rem 1rem;
   width: 100%;
   height: max-content;
   -webkit-box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55);
@@ -27,9 +27,9 @@
 
 .plus-btn {
   position: absolute;
-  padding: 1.5rem;
-  top: 10px;
-  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 12px;
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -45,4 +45,17 @@
 
 .plus-btn:hover {
   background-color: #4e46e580;
+}
+
+@media (max-width: 640px) {
+  .task-input {
+    font-size: 0.95rem;
+    padding: 1rem 3.8rem 1rem 0.9rem;
+  }
+
+  .plus-btn {
+    width: 34px;
+    height: 34px;
+    right: 10px;
+  }
 }

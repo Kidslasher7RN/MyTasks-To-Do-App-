@@ -4,6 +4,16 @@
       "id": "93e3",
       "state": "completed",
       "name": "go to mcdonald"
+    },
+    {
+      "id": "f56b",
+      "state": "active",
+      "name": "Make Sort by filter"
+    },
+    {
+      "id": "c40f",
+      "state": "active",
+      "name": "Make no task display"
     }
   ]
 }

@@ -1,9 +1,11 @@
 header {
-  width: 100%;
+  width: var(--content-width);
+  margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  gap: 1rem;
+  padding: 1rem 0 0.25rem;
 }
 
 header .logo {
@@ -15,6 +17,23 @@ header .logo {
 }
 
 header .logo span {
-  font-size: 2rem;
+  font-size: clamp(1.45rem, 4vw, 2rem);
   font-weight: 700;
+}
+
+header .day {
+  text-align: right;
+  font-size: clamp(0.9rem, 2.7vw, 1.05rem);
+}
+
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  header .day {
+    text-align: left;
+  }
 }
