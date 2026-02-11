@@ -1,4 +1,3 @@
-import "./tasks_list.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBan} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -39,21 +38,22 @@ export default function Task({id, name, state}) {
   }
 
   return (
-    <div className="single-task">
+    <div className="mx-auto mt-4 flex h-fit w-full items-center justify-start gap-3 rounded-[10px] bg-white p-[0.9rem] text-[#191a1b] shadow-[0px_0px_16px_-10px_rgba(66,68,90,0.55)] max-sm:mt-[0.8rem] max-sm:gap-[0.6rem] max-sm:p-[0.8rem]">
       <input
-        className="task-checkbox"
+        className="h-[1.4rem] w-[1.4rem] cursor-pointer rounded-full border-2 border-slate-400 accent-indigo-600"
         type="checkbox"
         checked={state == "completed"}
         onChange={completeTask}
       />
       <p
-        style={{
-          textDecoration: `${state == "completed" ? "line-through" : ""}`,
-        }}
+        className={`min-w-0 flex-1 [overflow-wrap:anywhere] ${state == "completed" ? "line-through" : ""}`}
       >
         {name}
       </p>
-      <button className="delete-single-task" onClick={deleteTask}>
+      <button
+        className="ml-auto cursor-pointer border-none bg-transparent text-base text-slate-500 transition-colors hover:text-red-500"
+        onClick={deleteTask}
+      >
         <FontAwesomeIcon icon={faBan} />
       </button>
     </div>

@@ -1,5 +1,3 @@
-import "./App.css";
-
 import Logo from "./components/Logo";
 import ProgressBar from "./components/ProgressBar";
 import NewTask from "./components/NewTask";
@@ -26,7 +24,7 @@ function App() {
     getTasks("http://localhost:3000/tasks");
   }, []);
   return (
-    <>
+    <div className="min-h-screen bg-slate-50 text-slate-400">
       <Logo />
 
       <TasksContext.Provider
@@ -38,7 +36,7 @@ function App() {
         <CheckList />
         <Stats />
       </TasksContext.Provider>
-    </>
+    </div>
   );
 }
 

@@ -1,19 +1,14 @@
 {
   "tasks": [
     {
-      "id": "93e3",
-      "state": "completed",
-      "name": "go to mcdonald"
-    },
-    {
-      "id": "f56b",
-      "state": "completed",
-      "name": "Make Sort by filter"
-    },
-    {
-      "id": "c40f",
+      "id": "9424",
       "state": "active",
-      "name": "Make no task display"
+      "name": "go to mcdonalds"
+    },
+    {
+      "id": "b288",
+      "state": "active",
+      "name": "eat banana"
     }
   ]
 }
