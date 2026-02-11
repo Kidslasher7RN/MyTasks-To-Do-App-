@@ -5,7 +5,6 @@ export default function ProgressBar() {
   const {tasks} = useContext(TasksContext);
   const completedTask = tasks.filter((task) => task.state == "completed");
   let percentages = (completedTask.length / tasks.length) * 100;
-  console.log(Number.isInteger(percentages));
 
   return (
     <div className="container">

@@ -6,12 +6,25 @@ import NewTask from "./components/NewTask";
 import FilterBox from "./components/FilterBox";
 import CheckList from "./components/tasks_list/CheckList";
 import Stats from "./components/Stats";
-//context
+import axios from "axios";
 import {TasksContext} from "./contexts/RootContext";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [shownTasks, setShownTasks] = useState([]);
+
+  useEffect(() => {
+    function getTasks(url) {
+      axios
+        .get(url)
+        .then((res) => {
+          setTasks(res.data);
+        })
+        .catch((err) => console.error("Fetch Error : ", err));
+    }
+    getTasks("http://localhost:3000/tasks");
+  }, []);
   return (
     <>
       <Logo />

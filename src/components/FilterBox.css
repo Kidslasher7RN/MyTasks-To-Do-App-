@@ -16,10 +16,6 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  /* 
-  -webkit-box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55);
-  -moz-box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55);
-  box-shadow: 0px 0px 16px -10px rgba(66, 68, 90, 0.55); */
 }
 
 .filter {
@@ -42,18 +38,74 @@
 }
 
 .filter:hover {
-  transform: scale(1.1);
+  transform: translateY(-1px);
 }
 
+.content-filter select {
+  background-color: #ffffff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.48rem 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+.content-filter select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 101, 241, 0.28);
+}
+.content-filter select option {
+  background-color: #ffffff;
+  color: #334155;
+  padding: 0.45rem;
+}
+
+.content-filter select option:checked {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
 .clear-completed {
   color: #64748b;
   border: none;
   background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   cursor: pointer;
   white-space: nowrap;
 }
 .clear-completed:hover {
   color: rgb(243, 70, 70);
+}
+
+.sort-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #64748b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 120ms ease-in-out;
+}
+
+.sort-btn:hover {
+  border-color: #a5b4fc;
+  color: #4f46e5;
+}
+
+.sort-btn.ascending {
+  color: #4f46e5;
+}
+
+.sort-btn.descending {
+  color: #0f172a;
 }
 
 @media (max-width: 640px) {
@@ -65,12 +117,22 @@
 
   .content-filter {
     width: 100%;
-    gap: 0.35rem;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .filter {
-    flex: 1;
+    flex: 1 1 30%;
     text-align: center;
+  }
+
+  .content-filter select {
+    flex: 1 1 60%;
+  }
+
+  .sort-btn {
+    flex: 0 0 auto;
   }
 
   .clear-completed {

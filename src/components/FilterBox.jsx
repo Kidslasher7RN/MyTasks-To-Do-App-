@@ -1,6 +1,10 @@
 import "./FilterBox.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faArrowDownShortWide,
+  faArrowUpShortWide,
+} from "@fortawesome/free-solid-svg-icons";
 import {useContext, useState, useEffect} from "react";
 import {TasksContext} from "../contexts/RootContext";
 import axios from "axios";
@@ -9,29 +13,8 @@ export default function FilterBox() {
   const {tasks, setTasks, setShownTasks} = useContext(TasksContext);
   const [currentFilter, setCurrentFilter] = useState("all");
 
-  useEffect(() => {
-    function getTasks(url) {
-      axios
-        .get(url)
-        .then((res) => {
-          setTasks(res.data);
-        })
-        .catch((err) => console.error("Fetch Error : ", err));
-    }
-    getTasks("http://localhost:3000/tasks");
-  }, []);
-
-  useEffect(() => {
-    if (currentFilter === "all") {
-      setShownTasks(tasks);
-      return;
-    }
-    if (currentFilter === "active") {
-      setShownTasks(tasks.filter((task) => task.state == "active"));
-      return;
-    }
-    setShownTasks(tasks.filter((task) => task.state == "completed"));
-  }, [tasks, currentFilter, setShownTasks]);
+  const [isSorted, setIsSorted] = useState("byDate");
+  const [sortType, setSortType] = useState("ascending");
 
   async function clearCompletedTasks() {
     const prev = tasks;
@@ -47,6 +30,56 @@ export default function FilterBox() {
       setTasks(prev);
     }
   }
+
+  useEffect(() => {
+    function sortTasks(filter) {
+      const taskState = {
+        completed: 1,
+        active: 0,
+      };
+      switch (isSorted) {
+        case "byDate":
+          sortType == "ascending"
+            ? setShownTasks([...filter])
+            : setShownTasks([...filter].reverse());
+          break;
+        case "byName":
+          sortType == "ascending"
+            ? setShownTasks(
+                [...filter].sort((a, b) => a.name.localeCompare(b.name)),
+              )
+            : setShownTasks(
+                [...filter].sort((a, b) => b.name.localeCompare(a.name)),
+              );
+          break;
+
+        default:
+          sortType == "ascending"
+            ? setShownTasks(
+                [...filter].sort(
+                  (a, b) => taskState[a.state] - taskState[b.state],
+                ),
+              )
+            : setShownTasks(
+                [...filter].sort(
+                  (a, b) => taskState[b.state] - taskState[a.state],
+                ),
+              );
+          break;
+      }
+    }
+    if (currentFilter === "all") {
+      sortTasks(tasks);
+      return;
+    }
+    if (currentFilter === "active") {
+      sortTasks(tasks.filter((task) => task.state == "active"));
+
+      return;
+    }
+
+    sortTasks(tasks.filter((task) => task.state == "completed"));
+  }, [tasks, currentFilter, setShownTasks, isSorted, sortType]);
 
   return (
     <div className="filter-box-container">
@@ -69,6 +102,25 @@ export default function FilterBox() {
         >
           Completed
         </li>
+        <select onChange={(e) => setIsSorted(e.target.value)}>
+          <option value="byDate">Sort by date</option>
+          <option value="byName">Sort by name</option>
+          <option value="byStatus">Sort by status</option>
+        </select>
+        <button
+          className={`sort-btn ${sortType}`}
+          onClick={() =>
+            sortType == "ascending"
+              ? setSortType("descending")
+              : setSortType("ascending")
+          }
+        >
+          {sortType == "ascending" ? (
+            <FontAwesomeIcon icon={faArrowDownShortWide} />
+          ) : (
+            <FontAwesomeIcon icon={faArrowUpShortWide} />
+          )}
+        </button>
       </ul>
 
       <button className="clear-completed" onClick={clearCompletedTasks}>
