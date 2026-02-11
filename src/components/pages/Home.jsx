@@ -8,21 +8,14 @@ import Stats from "../fragments/Stats";
 import axios from "axios";
 import {TasksContext} from "../../contexts/RootContext";
 import {useState, useEffect} from "react";
+import {getTasks} from "../../services/taskAPI.service";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [shownTasks, setShownTasks] = useState([]);
 
   useEffect(() => {
-    function getTasks(url) {
-      axios
-        .get(url)
-        .then((res) => {
-          setTasks(res.data);
-        })
-        .catch((err) => console.error("Fetch Error : ", err));
-    }
-    getTasks("http://localhost:3000/tasks");
+    getTasks((data) => setTasks(data));
   }, []);
   return (
     <div className="min-h-screen bg-slate-50 text-slate-400">
