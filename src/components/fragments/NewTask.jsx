@@ -2,7 +2,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {useContext, useRef} from "react";
-import {TasksContext} from "../contexts/RootContext";
+import {TasksContext} from "../../contexts/RootContext";
 
 export default function NewTask() {
   const {setTasks} = useContext(TasksContext);
@@ -29,7 +29,10 @@ export default function NewTask() {
   }
 
   return (
-    <form className="relative mx-auto mt-6 w-[92%] max-w-3xl" onSubmit={handleSubmit}>
+    <form
+      className="relative mx-auto mt-6 w-[92%] max-w-3xl"
+      onSubmit={handleSubmit}
+    >
       <input
         className="h-fit w-full rounded-[10px] border-none bg-white px-4 py-[1.1rem] pr-[4.25rem] text-base shadow-[0px_0px_16px_-10px_rgba(66,68,90,0.55)] outline-none transition duration-100 placeholder:text-slate-400 focus:ring-[3px] focus:ring-indigo-500/55 max-sm:px-[0.9rem] max-sm:py-4 max-sm:pr-[3.8rem] max-sm:text-[0.95rem]"
         placeholder="Add a new task..."

@@ -32,10 +32,13 @@ export default function Logo() {
     <header className="mx-auto flex w-[92%] max-w-3xl items-start justify-between gap-4 pb-1 pt-4 max-sm:flex-col max-sm:gap-[0.45rem]">
       <div className="flex flex-col items-start justify-center gap-1 text-slate-500">
         <span className="text-[clamp(1.45rem,4vw,2rem)] font-bold text-slate-900">
-          <FontAwesomeIcon icon={faListCheck} className="mr-2 text-indigo-600" />
+          <FontAwesomeIcon
+            icon={faListCheck}
+            className="mr-2 text-indigo-600"
+          />
           My Tasks
         </span>
-        <p>Stay focused and organized (this will be rebrandedd to "keepMyIdea")</p>
+        <p>Stay focused and organized</p>
       </div>
       <h3 className="text-[clamp(0.9rem,2.7vw,1.05rem)] text-right text-slate-600 max-sm:text-left">
         {days[date.getDay()]}, {month[date.getMonth()]} {date.getDate()}

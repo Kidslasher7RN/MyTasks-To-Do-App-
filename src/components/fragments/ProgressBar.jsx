@@ -1,4 +1,4 @@
-import {TasksContext} from "../contexts/RootContext";
+import {TasksContext} from "../../contexts/RootContext";
 import {useContext} from "react";
 export default function ProgressBar() {
   const {tasks} = useContext(TasksContext);

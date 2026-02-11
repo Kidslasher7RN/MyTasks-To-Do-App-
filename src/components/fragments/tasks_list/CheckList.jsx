@@ -1,6 +1,6 @@
 import Task from "./Task";
 import {useContext} from "react";
-import {TasksContext} from "../../contexts/RootContext";
+import {TasksContext} from "../../../contexts/RootContext";
 
 export default function CheckList() {
   const {shownTasks} = useContext(TasksContext);

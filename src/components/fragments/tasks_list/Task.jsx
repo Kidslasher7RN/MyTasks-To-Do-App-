@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBan} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import {TasksContext} from "../../contexts/RootContext";
+import {TasksContext} from "../../../contexts/RootContext";
 import {useContext} from "react";
 
 export default function Task({id, name, state}) {

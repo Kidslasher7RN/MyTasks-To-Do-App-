@@ -9,6 +9,11 @@
       "id": "b288",
       "state": "active",
       "name": "eat banana"
+    },
+    {
+      "id": "cbc3",
+      "state": "completed",
+      "name": "use tailwind"
     }
   ]
 }
