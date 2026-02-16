@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {TasksContext} from "../../contexts/RootContext";
+import {TasksContext} from "../../contexts/TasksContext";
 export default function Stats() {
   const {tasks} = useContext(TasksContext);
   return (

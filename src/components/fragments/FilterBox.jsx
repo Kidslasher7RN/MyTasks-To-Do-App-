@@ -5,7 +5,7 @@ import {
   faArrowUpShortWide,
 } from "@fortawesome/free-solid-svg-icons";
 import {useContext, useState, useEffect} from "react";
-import {TasksContext} from "../../contexts/RootContext";
+import {TasksContext} from "../../contexts/TasksContext";
 import axios from "axios";
 
 export default function FilterBox() {

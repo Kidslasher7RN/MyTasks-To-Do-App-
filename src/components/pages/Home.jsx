@@ -5,31 +5,20 @@ import NewTask from "../fragments/NewTask";
 import FilterBox from "../fragments/FilterBox";
 import CheckList from "../fragments/tasks_list/CheckList";
 import Stats from "../fragments/Stats";
-import axios from "axios";
-import {TasksContext} from "../../contexts/RootContext";
-import {useState, useEffect} from "react";
-import {getTasks} from "../../services/taskAPI.service";
+
+import TasksContextProvider from "../../contexts/TasksContext";
 
 export default function Home() {
-  const [tasks, setTasks] = useState([]);
-  const [shownTasks, setShownTasks] = useState([]);
-
-  useEffect(() => {
-    getTasks((data) => setTasks(data));
-  }, []);
   return (
     <div className="min-h-screen bg-slate-50 text-slate-400">
       <Logo />
-
-      <TasksContext.Provider
-        value={{tasks, setTasks, shownTasks, setShownTasks}}
-      >
+      <TasksContextProvider>
         <ProgressBar />
         <NewTask />
         <FilterBox />
         <CheckList />
         <Stats />
-      </TasksContext.Provider>
+      </TasksContextProvider>
     </div>
   );
 }

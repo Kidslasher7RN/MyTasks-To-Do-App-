@@ -1,16 +1,6 @@
 {
   "tasks": [
     {
-      "id": "9424",
-      "state": "active",
-      "name": "go to mcdonalds"
-    },
-    {
-      "id": "b288",
-      "state": "active",
-      "name": "eat banana"
-    },
-    {
       "id": "cbc3",
       "state": "completed",
       "name": "use tailwind"
@@ -19,6 +9,16 @@
       "id": "7474",
       "state": "active",
       "name": "make IG feeds that shows every tech tricks"
+    },
+    {
+      "id": "5388",
+      "state": "completed",
+      "name": "make reuseable custom hooks"
+    },
+    {
+      "id": "cbf8",
+      "state": "active",
+      "name": "make TLWA"
     }
   ]
 }
