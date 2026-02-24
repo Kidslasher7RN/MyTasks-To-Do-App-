@@ -6,9 +6,30 @@ import FilterBox from "../fragments/FilterBox";
 import CheckList from "../fragments/tasks_list/CheckList";
 import Stats from "../fragments/Stats";
 
+import {supabase} from "../../supabaseClient";
+import {AuthInfo} from "../../contexts/AuthContext";
+
 import TasksContextProvider from "../../contexts/TasksContext";
+import {useEffect, useContext} from "react";
+import {Navigate} from "react-router-dom";
 
 export default function Home() {
+  const {authSession, setAuthSession} = useContext(AuthInfo);
+
+  useEffect(() => {
+    async function getSession() {
+      const {data} = await supabase.auth.getSession();
+      setAuthSession(data.session);
+      console.log("session ok");
+    }
+
+    getSession();
+  }, [setAuthSession]);
+
+  if (!authSession) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-400">
       <Logo />

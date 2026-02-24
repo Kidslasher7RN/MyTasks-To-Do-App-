@@ -3,7 +3,7 @@ import {TasksContext} from "../../contexts/TasksContext";
 export default function Stats() {
   const {tasks} = useContext(TasksContext);
   return (
-    <footer className="mt-8 text-center text-[0.9rem] text-slate-600">
+    <footer className="mt-3 text-center text-[0.9rem] text-slate-600">
       {tasks.length == 0 ? (
         <p>no task is due</p>
       ) : (
