@@ -2,29 +2,32 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBan} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {TasksContext} from "../../../contexts/TasksContext";
-import {useContext} from "react";
+import {useContext, useState} from "react";
+import {completeTask} from "../../../services/taskAPI.service";
 
 export default function Task({id, name, state}) {
   const {tasks, setTasks} = useContext(TasksContext);
+  const [check, setCheck] = useState(state);
+  console.log(id);
 
-  async function completeTask(e) {
-    const checked = e.target.checked;
-    const nextState = checked ? "completed" : "active";
-    const prev = tasks;
+  // async function completeTask(e) {
+  //   const checked = e.target.checked;
+  //   const nextState = checked ? "completed" : "active";
+  //   const prev = tasks;
 
-    setTasks(
-      prev.map((task) => (task.id == id ? {...task, state: nextState} : task)),
-    );
+  //   setTasks(
+  //     prev.map((task) => (task.id == id ? {...task, state: nextState} : task)),
+  //   );
 
-    try {
-      await axios.patch(`http://localhost:3000/tasks/${id}`, {
-        state: nextState,
-      });
-    } catch (err) {
-      console.error(err);
-      setTasks(prev);
-    }
-  }
+  //   try {
+  //     await axios.patch(`http://localhost:3000/tasks/${id}`, {
+  //       state: nextState,
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //     setTasks(prev);
+  //   }
+  // }
 
   async function deleteTask() {
     const prev = tasks;
@@ -42,11 +45,13 @@ export default function Task({id, name, state}) {
       <input
         className="h-[1.4rem] w-[1.4rem] cursor-pointer rounded-full border-2 border-slate-400 accent-indigo-600"
         type="checkbox"
-        checked={state == "completed"}
-        onChange={completeTask}
+        checked={check}
+        onChange={() =>
+          completeTask(id, check, (data) => setCheck(data.is_completed))
+        }
       />
       <p
-        className={`min-w-0 flex-1 [overflow-wrap:anywhere] ${state == "completed" ? "line-through" : ""}`}
+        className={`min-w-0 flex-1 [overflow-wrap:anywhere] ${check ? "line-through" : ""}`}
       >
         {name}
       </p>

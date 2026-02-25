@@ -7,8 +7,6 @@ export default function AuthForm({authType}) {
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
 
-  const {authSession} = useContext(AuthInfo);
-
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
@@ -31,7 +29,6 @@ export default function AuthForm({authType}) {
       },
       setAuthError,
     );
-    console.log(authSession);
   }
 
   return (

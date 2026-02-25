@@ -3,28 +3,36 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {useContext, useRef} from "react";
 import {TasksContext} from "../../contexts/TasksContext";
+import {supabase} from "../../supabaseClient";
+import {AuthInfo} from "../../contexts/AuthContext";
 
 export default function NewTask() {
+  const {authSession} = useContext(AuthInfo);
   const {setTasks} = useContext(TasksContext);
 
   const inputRef = useRef(null);
 
-  async function handlePost(taskName) {
-    const newPost = {state: "active", name: taskName};
+  async function handlePost(newTask) {
+    const {data, error} = await supabase
+      .from("todos")
+      .insert(newTask)
+      .select()
+      .single();
 
-    axios
-      .post("http://localhost:3000/tasks", newPost)
-      .then((res) => {
-        setTasks((prev) => [...prev, res.data]);
-      })
-      .catch((err) => console.error(err));
+    if (error) throw error;
+    setTasks((prev) => [...prev, data]);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const taskName = inputRef.current.value;
-    if (!taskName) return;
-    handlePost(taskName);
+
+    const newTask = {
+      title: inputRef.current.value,
+      is_completed: false,
+      user_id: authSession.user.id,
+    };
+    if (!newTask) return;
+    handlePost(newTask);
     inputRef.current.value = "";
   }
 

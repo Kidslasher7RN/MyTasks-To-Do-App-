@@ -4,6 +4,7 @@ import {AuthInfo} from "../../contexts/AuthContext";
 import {useContext} from "react";
 import {supabase} from "../../supabaseClient";
 import {useNavigate} from "react-router-dom";
+import {TasksContext} from "../../contexts/TasksContext";
 
 // import {useEffect, useState} from "react";
 export default function Logo() {
@@ -32,11 +33,14 @@ export default function Logo() {
   ];
   const date = new Date();
 
-  const {authSession} = useContext(AuthInfo);
+  // const {setShownTasks, setTasks} = useContext(TasksContext);
+
+  const {authSession, setAuthSession} = useContext(AuthInfo);
 
   const navigate = useNavigate();
 
   async function handleLogout() {
+    setAuthSession(null);
     await supabase.auth.signOut();
     navigate("/login", {replace: true});
   }
