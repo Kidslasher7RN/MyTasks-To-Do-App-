@@ -45,10 +45,10 @@ export default function FilterBox() {
         case "byName":
           sortType == "ascending"
             ? setShownTasks(
-                [...filter].sort((a, b) => a.name.localeCompare(b.name)),
+                [...filter].sort((a, b) => a.title.localeCompare(b.title)),
               )
             : setShownTasks(
-                [...filter].sort((a, b) => b.name.localeCompare(a.name)),
+                [...filter].sort((a, b) => b.title.localeCompare(a.title)),
               );
           break;
 
@@ -56,12 +56,14 @@ export default function FilterBox() {
           sortType == "ascending"
             ? setShownTasks(
                 [...filter].sort(
-                  (a, b) => taskState[a.state] - taskState[b.state],
+                  (a, b) =>
+                    taskState[a.is_completed] - taskState[b.is_completed],
                 ),
               )
             : setShownTasks(
                 [...filter].sort(
-                  (a, b) => taskState[b.state] - taskState[a.state],
+                  (a, b) =>
+                    taskState[b.is_completed] - taskState[a.is_completed],
                 ),
               );
           break;
@@ -72,12 +74,12 @@ export default function FilterBox() {
       return;
     }
     if (currentFilter === "active") {
-      sortTasks(tasks.filter((task) => task.state == "active"));
+      sortTasks(tasks.filter((task) => task.is_completed === false));
 
       return;
     }
 
-    sortTasks(tasks.filter((task) => task.state == "completed"));
+    sortTasks(tasks.filter((task) => task.is_completed == true));
   }, [tasks, currentFilter, setShownTasks, isSorted, sortType]);
 
   return (
