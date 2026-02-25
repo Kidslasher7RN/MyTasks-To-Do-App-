@@ -22,3 +22,19 @@ export async function completeTask(id, state, callback) {
   if (error) throw error;
   callback(data);
 }
+
+export async function deleteTask(id, tasks, setTasks) {
+  const prev = tasks;
+  setTasks((prev) => prev.filter((task) => task.id !== id));
+
+  const {error} = await supabase.from("todos").delete().eq("id", id);
+
+  if (error) {
+    setTasks(prev);
+    throw error;
+  }
+}
+
+export async function clearCompletedTasks(){
+  
+}

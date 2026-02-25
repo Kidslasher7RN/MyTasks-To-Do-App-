@@ -4,6 +4,7 @@ import axios from "axios";
 import {TasksContext} from "../../../contexts/TasksContext";
 import {useContext, useState} from "react";
 import {completeTask} from "../../../services/taskAPI.service";
+import {deleteTask} from "../../../services/taskAPI.service";
 
 export default function Task({id, name, state}) {
   const {tasks, setTasks} = useContext(TasksContext);
@@ -29,16 +30,9 @@ export default function Task({id, name, state}) {
   //   }
   // }
 
-  async function deleteTask() {
-    const prev = tasks;
-    setTasks((prev) => prev.filter((task) => task.id !== id));
-    try {
-      await axios.delete(`http://localhost:3000/tasks/${id}`);
-    } catch (err) {
-      console.error(err);
-      setTasks(prev);
-    }
-  }
+  // async function deleteTask() {
+
+  // }
 
   return (
     <div className="mx-auto mt-4 flex h-fit w-full items-center justify-start gap-3 rounded-[10px] bg-white p-[0.9rem] text-[#191a1b] shadow-[0px_0px_16px_-10px_rgba(66,68,90,0.55)] max-sm:mt-[0.8rem] max-sm:gap-[0.6rem] max-sm:p-[0.8rem]">
@@ -57,7 +51,7 @@ export default function Task({id, name, state}) {
       </p>
       <button
         className="ml-auto cursor-pointer border-none bg-transparent text-base text-slate-500 transition-colors hover:text-red-500"
-        onClick={deleteTask}
+        onClick={() => deleteTask(id, tasks, setTasks)}
       >
         <FontAwesomeIcon icon={faBan} />
       </button>
