@@ -14,7 +14,7 @@ export async function register(email, password, setLoginError) {
 }
 
 export async function login(email, password, navigate, setLoginError) {
-  const {_, error} = await supabase.auth.signInWithPassword({
+  const {error} = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
   });

@@ -38,7 +38,7 @@ export default function Logo() {
 
   async function handleLogout() {
     await supabase.auth.signOut();
-    navigate("/login");
+    navigate("/login", {replace: true});
   }
 
   return (
@@ -52,7 +52,7 @@ export default function Logo() {
           My Tasks
         </span>
         <p className="justify-self-end text-slate-500 max-sm:col-span-2 max-sm:row-start-2 max-sm:justify-self-start">
-          {authSession?.user.email || "Guest"}
+          {authSession.user.email}
         </p>
         <h3 className="text-[clamp(0.9rem,2.7vw,1.05rem)] text-slate-600 max-sm:col-span-2 max-sm:row-start-3">
           {days[date.getDay()]}, {month[date.getMonth()]} {date.getDate()}

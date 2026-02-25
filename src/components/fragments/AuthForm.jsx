@@ -1,12 +1,13 @@
-import {useRef, useState} from "react";
-
-//Services
+import {useContext, useRef, useState} from "react";
 import {login, register} from "../../services/auth.service";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {AuthInfo} from "../../contexts/AuthContext";
 
 export default function AuthForm({authType}) {
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
+
+  const {authSession} = useContext(AuthInfo);
 
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
@@ -22,7 +23,15 @@ export default function AuthForm({authType}) {
     e.preventDefault();
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
-    login(email, password, () => navigate("/"), setAuthError);
+    login(
+      email,
+      password,
+      () => {
+        return navigate("/");
+      },
+      setAuthError,
+    );
+    console.log(authSession);
   }
 
   return (
@@ -90,6 +99,17 @@ export default function AuthForm({authType}) {
         >
           {authType === "login" ? "Login" : "Register"}
         </button>
+        <p className="text-center mt-4">
+          {authType === "login"
+            ? "Create new account"
+            : "Already have account?"}{" "}
+          <Link
+            className="text-blue-600 font-bold"
+            to={authType == "login" ? "/register" : "/login"}
+          >
+            {authType === "login" ? "Sign Up" : "Log In"}
+          </Link>
+        </p>
       </form>
     </main>
   );

@@ -1,5 +1,4 @@
 import Logo from "../fragments/Logo";
-// import ProgressBar from "../fragments/ProgressBar";
 import ProgressBar from "../fragments/ProgressBar";
 import NewTask from "../fragments/NewTask";
 import FilterBox from "../fragments/FilterBox";
@@ -11,23 +10,34 @@ import {AuthInfo} from "../../contexts/AuthContext";
 
 import TasksContextProvider from "../../contexts/TasksContext";
 import {useEffect, useContext} from "react";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function Home() {
   const {authSession, setAuthSession} = useContext(AuthInfo);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function getSession() {
       const {data} = await supabase.auth.getSession();
-      setAuthSession(data.session);
       console.log("session ok");
-    }
 
+      if (data.session) {
+        setAuthSession(data.session);
+      } else {
+        navigate("/login", {replace: true});
+      }
+    }
     getSession();
-  }, [setAuthSession]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!authSession) {
-    return <Navigate to="/login" />;
+    return (
+      <>
+        <p>Loading..........</p>
+      </>
+    );
   }
 
   return (
