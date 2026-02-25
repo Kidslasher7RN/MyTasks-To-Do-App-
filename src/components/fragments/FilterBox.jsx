@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {useContext, useState, useEffect} from "react";
 import {TasksContext} from "../../contexts/TasksContext";
-import axios from "axios";
+import {clearCompletedTasks} from "../../services/taskAPI.service";
 
 export default function FilterBox() {
   const {tasks, setTasks, setShownTasks} = useContext(TasksContext);
@@ -15,20 +15,16 @@ export default function FilterBox() {
   const [isSorted, setIsSorted] = useState("byDate");
   const [sortType, setSortType] = useState("ascending");
 
-  async function clearCompletedTasks() {
-    const prev = tasks;
-    setTasks((prev) => prev.filter((task) => task.state != "completed"));
-    const deletedTasks = prev.filter((task) => task.state == "completed");
-
-    try {
-      await deletedTasks.forEach((delTask) => {
-        axios.delete(`http://localhost:3000/tasks/${delTask.id}`);
-      });
-    } catch (err) {
-      console.error(err);
-      setTasks(prev);
-    }
-  }
+  // async function clearCompletedTasks() {
+  //   // try {
+  //   //   await deletedTasks.forEach((delTask) => {
+  //   //     axios.delete(`http://localhost:3000/tasks/${delTask.id}`);
+  //   //   });
+  //   // } catch (err) {
+  //   //   console.error(err);
+  //   //   setTasks(prev);
+  //   // }
+  // }
 
   useEffect(() => {
     function sortTasks(filter) {
@@ -129,7 +125,7 @@ export default function FilterBox() {
 
       <button
         className="inline-flex cursor-pointer items-center gap-[0.45rem] whitespace-nowrap border-none bg-transparent text-slate-500 transition-colors hover:text-red-500 max-sm:self-end"
-        onClick={clearCompletedTasks}
+        onClick={() => clearCompletedTasks(tasks, setTasks)}
       >
         <FontAwesomeIcon icon={faTrash} />
         Clear Completed

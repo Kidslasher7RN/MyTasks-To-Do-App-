@@ -35,6 +35,17 @@ export async function deleteTask(id, tasks, setTasks) {
   }
 }
 
-export async function clearCompletedTasks(){
-  
+export async function clearCompletedTasks(tasks, setTasks) {
+  const prev = tasks;
+  console.log(prev);
+  setTasks((prev) => prev.filter((task) => task.is_completed === false));
+  const deletedTasks = prev.filter((task) => task.is_completed === true);
+
+  deletedTasks.forEach(async (task) => {
+    const {error} = await supabase.from("todos").delete().eq("id", task.id);
+    if (error) {
+      setTasks(prev);
+      throw error;
+    }
+  });
 }
