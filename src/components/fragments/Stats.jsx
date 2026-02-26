@@ -8,7 +8,7 @@ export default function Stats() {
         <p>no task is due</p>
       ) : (
         <p>
-          {tasks.filter((task) => task.state == "completed").length} completed |{" "}
+          {tasks.filter((task) => task.is_completed === true).length} completed |{" "}
           {tasks.length} total
         </p>
       )}

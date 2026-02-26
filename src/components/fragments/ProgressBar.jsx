@@ -2,7 +2,8 @@ import {TasksContext} from "../../contexts/TasksContext";
 import {useContext} from "react";
 export default function ProgressBar() {
   const {tasks} = useContext(TasksContext);
-  const completedTask = tasks.filter((task) => task.state == "completed");
+
+  const completedTask = tasks.filter((task) => task.is_completed === true);
   let percentages = (completedTask.length / tasks.length) * 100;
   const progressWidth = Number.isFinite(percentages) ? percentages : 0;
 

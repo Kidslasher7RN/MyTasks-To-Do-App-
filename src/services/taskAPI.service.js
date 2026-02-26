@@ -11,16 +11,30 @@ export async function getTasks(userId, callback) {
   callback(data);
 }
 
-export async function completeTask(id, state, callback) {
+export async function completeTask(id, tasks, setTasks) {
+  const prev = tasks;
+
+  setTasks((current) =>
+    current.map((task) =>
+      task.id === id ? {...task, is_completed: !task.is_completed} : task,
+    ),
+  );
+
+  const nextState = !prev.find((task) => task.id === id)?.is_completed;
+
   const {data, error} = await supabase
     .from("todos")
-    .update({is_completed: !state})
+    .update({is_completed: nextState})
     .eq("id", id)
     .select()
     .single();
 
-  if (error) throw error;
-  callback(data);
+  if (error) {
+    setTasks(prev);
+    throw error;
+  }
+
+  setTasks((current) => current.map((task) => (task.id === id ? data : task)));
 }
 
 export async function deleteTask(id, tasks, setTasks) {

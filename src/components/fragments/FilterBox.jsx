@@ -15,17 +15,6 @@ export default function FilterBox() {
   const [isSorted, setIsSorted] = useState("byDate");
   const [sortType, setSortType] = useState("ascending");
 
-  // async function clearCompletedTasks() {
-  //   // try {
-  //   //   await deletedTasks.forEach((delTask) => {
-  //   //     axios.delete(`http://localhost:3000/tasks/${delTask.id}`);
-  //   //   });
-  //   // } catch (err) {
-  //   //   console.error(err);
-  //   //   setTasks(prev);
-  //   // }
-  // }
-
   useEffect(() => {
     function sortTasks(filter) {
       const taskState = {
