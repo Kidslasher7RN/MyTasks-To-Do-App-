@@ -1,10 +1,12 @@
-import {useContext, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {login, register} from "../../services/auth.service";
 import {Link, useNavigate} from "react-router-dom";
-import {AuthInfo} from "../../contexts/AuthContext";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function AuthForm({authType}) {
   const [authError, setAuthError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const emailInputRef = useRef(null);
@@ -70,16 +72,26 @@ export default function AuthForm({authType}) {
             >
               Password
             </label>
-            <input
-              ref={passwordInputRef}
-              id="password"
-              name="password"
-              type="password"
-              required
-              placeholder="Enter your password"
-              autoComplete="current-password"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-            />
+            <div className="relative">
+              <input
+                ref={passwordInputRef}
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                required
+                placeholder="Enter your password"
+                autoComplete={authType === "login" ? "current-password" : "new-password"}
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 pr-10 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              />
+              <button
+                type="button"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 transition hover:text-slate-700"
+              >
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </button>
+            </div>
           </div>
         </div>
         {authError && (

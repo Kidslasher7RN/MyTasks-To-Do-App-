@@ -18,7 +18,7 @@ export default function Task({id, name, state}) {
         onChange={() => completeTask(id, tasks, setTasks)}
       />
       <p
-        className={`min-w-0 flex-1 [overflow-wrap:anywhere] ${state ? "line-through" : ""}`}
+        className={`min-w-0 flex-1 wrap-anywhere ${state ? "line-through" : ""}`}
       >
         {name}
       </p>

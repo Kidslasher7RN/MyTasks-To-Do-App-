@@ -4,9 +4,7 @@ import {AuthInfo} from "../../contexts/AuthContext";
 import {useContext} from "react";
 import {supabase} from "../../supabaseClient";
 import {useNavigate} from "react-router-dom";
-import {TasksContext} from "../../contexts/TasksContext";
 
-// import {useEffect, useState} from "react";
 export default function Logo() {
   const days = [
     "Sunday",
@@ -33,8 +31,6 @@ export default function Logo() {
   ];
   const date = new Date();
 
-  // const {setShownTasks, setTasks} = useContext(TasksContext);
-
   const {authSession, setAuthSession} = useContext(AuthInfo);
 
   const navigate = useNavigate();
@@ -53,7 +49,7 @@ export default function Logo() {
             icon={faListCheck}
             className="mr-2 text-indigo-600"
           />
-          My Tasks
+          Remind Me Lol
         </span>
         <p className="justify-self-end text-slate-500 max-sm:col-span-2 max-sm:row-start-2 max-sm:justify-self-start">
           {authSession.user.email}

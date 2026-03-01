@@ -11,6 +11,7 @@ import {AuthInfo} from "../../contexts/AuthContext";
 import TasksContextProvider from "../../contexts/TasksContext";
 import {useEffect, useContext} from "react";
 import {useNavigate} from "react-router-dom";
+import Loading from "../fragments/Loading";
 
 export default function Home() {
   const {authSession, setAuthSession} = useContext(AuthInfo);
@@ -35,7 +36,7 @@ export default function Home() {
   if (!authSession) {
     return (
       <>
-        <p>Loading..........</p>
+        <Loading />
       </>
     );
   }
