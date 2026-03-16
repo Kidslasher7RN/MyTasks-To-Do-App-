@@ -1,5 +1,4 @@
 import {supabase} from "../supabaseClient";
-import {Navigate, redirect} from "react-router-dom";
 
 export async function register(
   email,
