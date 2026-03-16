@@ -5,7 +5,7 @@ import "./index.css";
 import Home from "./components/pages/Home.jsx";
 import TaskView from "./components/pages/TaskView.jsx";
 import ErrorPage from "./components/pages/ErrorPage.jsx";
-import AuthForm from "./components/fragments/authForm.jsx";
+import AuthForm from "./components/fragments/AuthForm.jsx";
 import AuthProvider from "./contexts/AuthContext.jsx";
 import Loading from "./components/fragments/Loading.jsx";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage.jsx";

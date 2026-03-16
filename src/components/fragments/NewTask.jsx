@@ -1,6 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import {useContext, useRef} from "react";
 import {TasksContext} from "../../contexts/TasksContext";
 import {supabase} from "../../supabaseClient";
